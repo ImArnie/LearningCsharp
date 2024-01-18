@@ -1,0 +1,37 @@
+﻿
+@{
+    // Pripoj sa k databáze pomocou metódy Open
+    var db = WebMatrix.Data.Database.Open("WebMatrixTest");
+
+    // Napíš SQL dotaz, ktorý vyberie všetky riadky z tabuľky Movies
+    var sql = "SELECT * FROM Movies";
+
+    // Použi metódu Query, ktorá vráti zoznam riadkov ako výsledok
+    var data = db.Query(sql);
+}
+
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="utf-8" />
+    <title>Zobraziť dáta z databázy</title>
+</head>
+<body>
+    <h1>Zobraziť dáta z databázy</h1>
+    <ul>
+        @foreach (var row in data)
+        {
+            <li>
+                <h2>@row.Title</h2>
+                <p>Žáner: @row.Genre</p>
+                <p>Rok: @row.Year</p>
+                <p>Herci: @row.Actors</p>
+                <img src="@row.Poster" alt="Plagát filmu" />
+                <p>Popis: @row.Description</p>
+                <p>Trailer: @row.Trailer</p>
+                <p>Komentáre: @row.Comments</p>
+            </li>
+        }
+    </ul>
+</body>
+</html>
